@@ -1,0 +1,24 @@
+WITH RECURSIVE hours AS (
+    SELECT 0 AS hour
+    UNION ALL
+    SELECT hour + 1 FROM hours WHERE hour < 23
+)
+
+SELECT 
+    h.hour,
+    COUNT(a.DATETIME) AS COUNT
+FROM hours h
+LEFT JOIN ANIMAL_OUTS a ON HOUR(a.DATETIME) = h.hour
+GROUP BY h.hour
+ORDER BY h.hour;
+
+-- 어거지 코드 (그냥,, 희망 사항으로 having에 조건 넣어봄)
+SELECT
+    HOUR(DATETIME) HOUR,
+    COUNT(*) COUNT
+FROM ANIMAL_OUTS
+GROUP BY 
+    HOUR(DATETIME)
+HAVING 
+    HOUR BETWEEN 0 and 23
+ORDER BY HOUR(DATETIME) ASC;
